@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="a" extends="struts-default" namespace="/">
+        <action name="toCinema" class="org.gec.controller.Cinema">
+            <result>cinema.jsp</result>
+        </action>
+
+        <action name="FilmSearchServlet" class="org.gec.controller.FilmController" method="findFilms">
+            <result>/WEB-INF/page/result.jsp</result>
+        </action>
+
+        <!-- toAddFilm页面-->
+        <action name="toAddFilm" class="org.gec.controller.Cinema">
+            <result>/WEB-INF/page/add.jsp</result>
+        </action>
+
+        <!-- 添加电影信息
+             result:默认是dispatcher 跳转   request.getRequestDispatcher
+                    chain:链式调用
+                         param:action名
+                    redirect:跳转jsp
+                    redirectAction:可以跳转jsp,也可以跳转action
+        -->
+        <action name="FilmAddServlet" class="org.gec.controller.FilmController" method="FilmAddServlet">
+            <result type="chain">
+                <param name="actionName">toAddFilm</param>
+            </result>
+        </action>
+    </package>
+</struts>
